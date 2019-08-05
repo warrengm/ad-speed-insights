@@ -55,6 +55,7 @@ module.exports = {
   category: {
     title: 'Publisher Ads [Beta]',
     auditRefs: [
+      // DO NOT SORT - Audits will be displayed in the order shown.
       // Measurements group.
       {id: 'tag-load-time', weight: 4, group: 'metrics'},
       {id: 'ad-request-from-tag-load', weight: 4, group: 'metrics'},
