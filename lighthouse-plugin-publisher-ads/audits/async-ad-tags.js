@@ -79,7 +79,7 @@ class AsyncAdTags extends Audit {
       return auditNotApplicable.NoTag;
     }
 
-    const numSync = array.count(tagReqs, isAsync) - tagReqs.length;
+    const numSync = tagReqs.length - array.count(tagReqs, isAsync);
     const passed = (numSync === 0);
     return {
       score: Number(passed),
