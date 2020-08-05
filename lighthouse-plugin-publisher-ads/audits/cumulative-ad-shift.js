@@ -24,8 +24,10 @@ const UIStrings = {
   failureTitle: 'Reduce ad-related layout shift',
   description:
       'Measures [layout shifts](https://web.dev/cls) that were ' +
-          'caused by ads or happened near ads. Avoid layout shifts to improve ' +
-          'user experience.',
+          'caused by ads or happened near ads. Reducing cumulative ad shift ' +
+          'will improve user experience. For more information about ' +
+          'minimizing layout shift in GPT, [visit the developer reference]' +
+          '(https://developers.google.com/doubleclick-gpt/guides/minimize-layout-shift)',
 };
 
 const str_ = i18n.createMessageInstanceIdFn(__filename, UIStrings);
@@ -100,8 +102,10 @@ class CumulativeAdShift extends Audit {
     let numPreImplTagAdShifts = 0;
     for (const event of shiftEvents) {
       if (!event.args || !event.args.data || !event.args.data.is_main_frame ||
-          // @ts-ignore Sometimes the initial navigation counts as recent input.
-          event.args.data.had_recent_input) {
+         // Should remove the had_recent_input check after Lighthouse 6.2 is
+         // released.
+         // @ts-ignore Sometimes the initial navigation counts as recent input.
+         event.args.data.had_recent_input) {
         continue;
       }
       // @ts-ignore
